@@ -1,0 +1,5 @@
+# input files
+*.txt
+
+# session cookie
+config.json

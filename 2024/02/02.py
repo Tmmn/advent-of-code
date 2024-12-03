@@ -26,7 +26,7 @@ class ReportCheck:
             elif dampener == 1:
                 up_bool, up_ind = self.check_up(line)
                 down_bool, down_ind = self.check_down(line)
-                for i in range(-1, 2):
+                for i in range(-1, 1):
                     if up_bool or down_bool:
                         break
                     up_bool, _ = self.check_up(line[:up_ind+i] + line[up_ind+i+1:])

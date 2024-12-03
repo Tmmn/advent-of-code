@@ -2,6 +2,7 @@ from utils import runner
 
 
 class New:
+
     def __init__(self):
         pass
 

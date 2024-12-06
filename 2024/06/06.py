@@ -12,18 +12,18 @@ class Guard:
 
     def __init__(self, plan):
         self.plan = [[i for i in j] for j in plan]
-        self.__backup_plan = deepcopy(self.plan)
-        self.pos = self.find_start()
-        self.orientation = "U"
-        self.visited = [self.pos]
-        self.visited_from = [(self.pos[0], self.pos[1], self.orientation)]
+        self.plan_backup = deepcopy(self.plan)
+        self.pos = None
+        self.orientation = None
+        self.visited = None
+        self.visited_from = None
+        self.reset_guard()
 
     def reset_guard(self):
-        self.plan = deepcopy(self.__backup_plan)
         self.pos = self.find_start()
         self.orientation = "U"
-        self.visited = [self.pos]
-        self.visited_from = [(self.pos[0], self.pos[1], self.orientation)]
+        self.visited = {self.pos}
+        self.visited_from = {(self.pos[0], self.pos[1], self.orientation)}
 
     def find_start(self):
         for y, row in enumerate(self.plan):
@@ -84,13 +84,12 @@ class Guard:
                 break
             self.pos = next_pos[0], next_pos[1]
             # remember position
-            if self.pos not in self.visited:
-                self.visited.append(self.pos)
+            self.visited.add(self.pos)
             pos_direct = (self.pos[0], self.pos[1], self.orientation)
             if pos_direct in self.visited_from:
                 raise Loop
             else:
-                self.visited_from.append(pos_direct)
+                self.visited_from.add(pos_direct)
         return len(self.visited)
 
     @runner
@@ -98,13 +97,13 @@ class Guard:
         loops = 0
         to_check = self.visited.copy()
         for i, pos in enumerate(to_check):
-            print(f"{i} / {len(to_check)}")
             self.reset_guard()
             self.plan[pos[0]][pos[1]] = "#"
             try:
                 self.predict_path()
             except Loop:
                 loops += 1
+            self.plan[pos[0]][pos[1]] = self.plan_backup[pos[0]][pos[1]]
         return loops
 
 

@@ -4,7 +4,8 @@ This repository contains my solutions to some of the problems provided by [adven
 
 - [x] 2022: days 1 - 14
 - [x] 2023 (incomplete)
-- [ ] 2024
+- [ ] 2024 (incomplete)
+- [ ] 2025
 
 ## Downloader
 

@@ -85,9 +85,7 @@ class AOCDownloader:
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="Input downloader for Advent of Code")
-    parser.add_argument('-d', '--day', help="force download of specific day", default=None, required=False)
-    parser.add_argument('-y', '--year', help="force download of specific year", default=None, required=False)
-    parser.add_argument('--py', help='set to create an empty python file', action='store_true', default=False,
-                        required=False)
+    parser.add_argument('-d', '--day', help="force download of specific day", default=None, required=False, type=int)
+    parser.add_argument('-y', '--year', help="force download of specific year", default=None, required=False, type=int)
     arguments = parser.parse_args()
     AOCDownloader(args=arguments)
